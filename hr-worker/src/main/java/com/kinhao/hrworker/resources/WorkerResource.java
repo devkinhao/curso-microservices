@@ -18,9 +18,9 @@ import com.kinhao.hrworker.repositories.WorkerRepository;
 @RestController
 @RequestMapping("/workers")
 public class WorkerResource {
-	
+
 	private static Logger logger = LoggerFactory.getLogger(WorkerResource.class);
-	
+
 	@Autowired
 	private Environment env;
 
@@ -37,8 +37,16 @@ public class WorkerResource {
 	@GetMapping("/{id}")
 	public ResponseEntity<Worker> findById(@PathVariable Long id) {
 		
-		logger.info("PORT = " + env.getProperty("local.server.port"));
+		/*
+		try {
+			Thread.sleep(3000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		*/
 		
+		logger.info("PORT = " + env.getProperty("local.server.port"));
+
 		Worker worker = workerRepository.findById(id).get();
 		return ResponseEntity.ok(worker);
 	}
